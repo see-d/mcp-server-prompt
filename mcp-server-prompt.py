@@ -176,4 +176,4 @@ Choose the right decorator for your use case!
 """
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="streamable-http")
