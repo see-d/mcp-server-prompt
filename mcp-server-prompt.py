@@ -1,7 +1,20 @@
 from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp.server import TransportSecuritySettings
 
-# Initialize FastMCP server with CORS enabled for remote access
-mcp = FastMCP("MCP Tools", allow_origin="*")
+# Initialize FastMCP server - bind to all interfaces for remote access
+# Disable DNS rebinding protection to allow remote connections
+security_settings = TransportSecuritySettings(
+    enable_dns_rebinding_protection=False,
+    allowed_hosts=["*"],
+    allowed_origins=["*"]
+)
+
+mcp = FastMCP(
+    "MCP Tools", 
+    host="0.0.0.0", 
+    port=8000,
+    transport_security=security_settings
+)
 
 
 @mcp.tool()
@@ -176,4 +189,5 @@ Choose the right decorator for your use case!
 """
 
 if __name__ == "__main__":
-   mcp.run(transport="streamable-http", host="0.0.0.0", port=8000)
+    mcp.run(transport="streamable-http")
+
