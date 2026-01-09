@@ -1,7 +1,7 @@
 from mcp.server.fastmcp import FastMCP
 
-# Initialize FastMCP server
-mcp = FastMCP("MCP Tools")
+# Initialize FastMCP server with CORS enabled for remote access
+mcp = FastMCP("MCP Tools", allow_origin="*")
 
 
 @mcp.tool()
@@ -176,4 +176,4 @@ Choose the right decorator for your use case!
 """
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http")
+   mcp.run(transport="streamable-http", host="0.0.0.0", port=8000)

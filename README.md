@@ -63,19 +63,27 @@ Start the MCP server:
 uv run python mcp-server-prompt.py
 ```
 
-The server runs on streamable HTTP transport and waits for MCP client connections.
+The server will start on `http://0.0.0.0:8000` and wait for MCP client connections.
 
 ### Testing with MCP Inspector
 
-Test the server interactively:
+For streamable-http servers, you need to start the server first, then connect the inspector:
+
+**Step 1: Start the server** (in one terminal):
 ```bash
-uv run mcp dev mcp-server-prompt.py
+uv run python mcp-server-prompt.py
 ```
 
-This opens the MCP Inspector in your browser where you can:
-- Test tools with different parameters
-- View server logs in real-time
-- Debug before integrating with clients
+You should see output indicating the server is running on port 8000.
+
+**Step 2: Connect MCP Inspector** (in another terminal or tab):
+```bash
+npx @modelcontextprotocol/inspector http://localhost:8000/mcp
+```
+
+Alternatively, visit the MCP Inspector web interface and connect to `http://localhost:8000/mcp`.
+
+**Note:** The `mcp dev` command is designed for stdio transport and won't work correctly with streamable-http servers.
 
 ### Configuring with Claude Desktop
 
